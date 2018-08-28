@@ -7,9 +7,9 @@
       <% include ./partials/header %>
     </header>
     <div class="container">
-      <% var url = "/cooking/" + cooki g.id + "?_method=PUT" %>
+      <% var url = "/cooking/" + cooking.id + "?_method=PUT" %>
       <form method="POST" action=<%= url %> >
-        <input required name="recipe" value=<%= cooking.title %> />
+        <input required name="recipe" value=<%= cookings.recipe %> />
         <a href="/cooking" class="btn red">Cancel</a>
         <button class="btn">Save</button>
      </form>

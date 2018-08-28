@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var Cooking = require('../models').Cooking;
+var Cookings = require('../models').Cookings;
 
 router.get('/', function(req, res) {
-  Cooking.all({
+  Cookings.all({
     order: [
       ['createdAt', 'ASC']
     ]
   })
-    .then( function(Cooking) {
+    .then( function(cooking) {
       return res.render('cooking', { cooking: cooking });
   })
 });
@@ -16,14 +16,14 @@ router.get('/', function(req, res) {
 /* POST add recipe listing */
 router.post('/', function(req, res) {
   var Recipe = req.body.recipe;
-  Cooking.create({ Recipe: Recipe })
+  Cookings.create({ Recipe: Recipe })
     .then( function() {
       res.redirect('/cooking');
   });
 });
 
 router.delete('/:id', function(req, res) {
-  Cooking.findById(req.params.id)
+  Cookings.findById(req.params.id)
     .then( function(cooking) {
       cooking.destroy()
     })
@@ -33,14 +33,14 @@ router.delete('/:id', function(req, res) {
 });
 
 router.get('/:id/edit', function(req, res) {
-  Cooking.findById(req.params.id)
+  Cookings.findById(req.params.id)
     .then( function(cooking) {
       return res.render('edit', { Recipe: Recipe });
   });
 });
 
 router.put('/:id', function(req, res) {
-  Cooking.update(
+  Cookings.update(
     { Recipe: req.body.title },
     { where: { id: req.params.id } }
   )
